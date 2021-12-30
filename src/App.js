@@ -1,6 +1,7 @@
 import React, { useReducer } from "react";
 import AddTodo from "./AddTodo";
 import TodoList from "./Todolist";
+import { TodosContext, TodosDispatchContext } from "./TodosContext";
 import "./App.css";
 
 let nextId = 0;
@@ -20,15 +21,15 @@ export default function TodoApp() {
   };
 
   return (
-    <div className="main">
-      <h1>Todo list</h1>
-      <AddTodo onAddTodo={handleAddTodo} />
-      <TodoList
-        todos={todos}
-        onChangeTodo={handleChangeTodo}
-        onDeleteTodos={handleDeleteTodo}
-      ></TodoList>
-    </div>
+    <TodosContext.Provider value={todos}>
+      <TodosDispatchContext value={dispatch}>
+        <div className="main">
+          <h1>Todo list</h1>
+          <AddTodo />
+          <TodoList />
+        </div>
+      </TodosDispatchContext>
+    </TodosContext.Provider>
   );
 }
 

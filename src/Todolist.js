@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { TodosContext } from "./TodosContext";
 
-export default function TodoList({ todos, onChangeTodo, onDeleteTodos }) {
+export default function TodoList({ onChangeTodo, onDeleteTodos }) {
+  const todos = useContext(TodosContext);
   return (
     <ul>
       {todos.map((todo) => (

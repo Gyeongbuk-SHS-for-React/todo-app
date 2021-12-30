@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { TodosDispatchContext } from "./TodosContext";
 
-const AddTodo = ({ onAddTodo }) => {
+let nextId = 0;
+const AddTodo = () => {
   const [value, setValues] = useState("");
+  const dispatch = useContext(TodosDispatchContext);
   return (
     <div>
       <input
@@ -12,7 +15,7 @@ const AddTodo = ({ onAddTodo }) => {
       <button
         onClick={() => {
           setValues("");
-          onAddTodo(value);
+          dispatch({ type: "add", id: nextId++, content: value });
         }}
       >
         추가
